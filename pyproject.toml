@@ -1,0 +1,71 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mythicforge"
+version = "1.0.0"
+description = "Adversarial prompt injection, jailbreak & LLM security testing framework"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "5h4d0wn1k", email = "5h4d0wn1k@users.noreply.github.com"}
+]
+keywords = [
+    "llm", "security", "prompt-injection", "jailbreak", "adversarial",
+    "red-team", "ai-safety", "owasp", "penetration-testing"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Security",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Typing :: Typed",
+]
+dependencies = []
+
+[project.optional-dependencies]
+api = ["openai>=1.0.0"]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "pytest-timeout>=2.0",
+]
+all = ["mythicforge[api,dev]"]
+
+[project.scripts]
+mythicforge = "mythicforge.cli.main:main"
+
+[project.urls]
+Homepage = "https://github.com/5h4d0wn1k/mythicforge"
+Documentation = "https://github.com/5h4d0wn1k/mythicforge#readme"
+Repository = "https://github.com/5h4d0wn1k/mythicforge"
+Issues = "https://github.com/5h4d0wn1k/mythicforge/issues"
+
+[tool.setuptools.packages.find]
+include = ["mythicforge*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "slow: marks tests as slow",
+    "integration: marks integration tests requiring API keys",
+]
+addopts = "-v --tb=short"
+
+[tool.coverage.run]
+source = ["mythicforge"]
+omit = ["tests/*"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 90
